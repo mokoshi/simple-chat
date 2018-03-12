@@ -4,10 +4,10 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
-	"github.com/mokoshi/go-simple-chat/controller"
-	"github.com/mokoshi/go-simple-chat/db"
-	"github.com/mokoshi/go-simple-chat/models"
-	m "github.com/mokoshi/go-simple-chat/middleware"
+	"github.com/mokoshi/simple-chat/go-api-server/controller"
+	"github.com/mokoshi/simple-chat/go-api-server/db"
+	"github.com/mokoshi/simple-chat/go-api-server/models"
+	m "github.com/mokoshi/simple-chat/go-api-server/middleware"
 )
 
 func main() {

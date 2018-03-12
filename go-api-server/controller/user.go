@@ -3,8 +3,8 @@ package controller
 import (
 	"github.com/labstack/echo"
 	"net/http"
-	"github.com/mokoshi/go-simple-chat/service"
-	"github.com/mokoshi/go-simple-chat/middleware"
+	"github.com/mokoshi/simple-chat/go-api-server/service"
+	"github.com/mokoshi/simple-chat/go-api-server/middleware"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )

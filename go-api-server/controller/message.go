@@ -2,10 +2,10 @@ package controller
 
 import (
 	"github.com/labstack/echo"
-	"github.com/mokoshi/go-simple-chat/service"
+	"github.com/mokoshi/simple-chat/go-api-server/service"
 	"net/http"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/mokoshi/go-simple-chat/middleware"
+	"github.com/mokoshi/simple-chat/go-api-server/middleware"
 )
 
 func ListMessages(c echo.Context) (e error) {

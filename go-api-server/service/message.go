@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/mokoshi/go-simple-chat/db"
-	"github.com/mokoshi/go-simple-chat/models"
+	"github.com/mokoshi/simple-chat/go-api-server/db"
+	"github.com/mokoshi/simple-chat/go-api-server/models"
 )
 
 func GetMessages() (messages []models.Message, err error) {

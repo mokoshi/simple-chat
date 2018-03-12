@@ -3,8 +3,8 @@ package service
 
 import (
 	"golang.org/x/crypto/bcrypt"
-	"github.com/mokoshi/go-simple-chat/models"
-	"github.com/mokoshi/go-simple-chat/db"
+	"github.com/mokoshi/simple-chat/go-api-server/models"
+	"github.com/mokoshi/simple-chat/go-api-server/db"
 )
 
 func CreateUser(name string, password string) (id uint, err error) {
