@@ -21,6 +21,11 @@ func main() {
 		SigningKey: []byte("secret"),
 	})
 
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"*"},
+	}))
+
 	e.POST("/signup", controller.Signup)
 
 	e.POST("/login", controller.Login)
