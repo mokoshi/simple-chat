@@ -7,7 +7,7 @@ import (
 
 func GetMessages() (messages []models.Message, err error) {
 
-	if err = db.GetConnection().Find(&messages).Error; err != nil {
+	if err = db.GetConnection().Preload("User").Find(&messages).Error; err != nil {
 		return
 	}
 

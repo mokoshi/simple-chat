@@ -19,9 +19,9 @@ func Signup(c echo.Context) (e error) {
 		return
 	}
 
-	userId, _ := service.CreateUser(req.Name, req.Password)
+	user, _ := service.CreateUser(req.Name, req.Password)
 
-	return c.JSON(http.StatusOK, echo.Map{"user_id": userId})
+	return c.JSON(http.StatusOK, user)
 }
 
 func Login(c echo.Context) (e error) {
@@ -34,13 +34,13 @@ func Login(c echo.Context) (e error) {
 		return
 	}
 
-	userId, err := service.VerifyUser(req.Name, req.Password)
+	user, err := service.VerifyUser(req.Name, req.Password)
 
 	if err != nil {
 		return c.NoContent(http.StatusForbidden)
 	}
 
-	claims := &middleware.JWTClaims{UserId: userId}
+	claims := &middleware.JWTClaims{UserId: user.ID}
 	claims.ExpiresAt = time.Now().Add(time.Hour * 72).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
@@ -49,5 +49,5 @@ func Login(c echo.Context) (e error) {
 		return c.NoContent(http.StatusForbidden)
 	}
 
-	return c.JSON(http.StatusOK, echo.Map{"token": t})
+	return c.JSON(http.StatusOK, echo.Map{"user": user, "jwt": t})
 }
