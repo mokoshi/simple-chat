@@ -5,9 +5,34 @@ import (
 	"github.com/mokoshi/simple-chat/go-api-server/models"
 )
 
-func GetMessages() (messages []models.Message, err error) {
+const MaxInt = 4294967295
 
-	if err = db.GetConnection().Preload("User").Find(&messages).Error; err != nil {
+func GetOlderMessages(endId uint, limit uint) (messages []models.Message, err error) {
+
+	if endId <= 0 {
+		endId = MaxInt
+	}
+	if limit <= 0 {
+		limit = 15
+	}
+
+	if err = db.GetConnection().Preload("User").Where("id <= ?", endId).Order("ID desc").Limit(limit).Find(&messages).Error; err != nil {
+		return
+	}
+
+	return
+}
+
+func GetNewerMessages(startId uint, limit uint) (messages []models.Message, err error) {
+
+	if startId <= 0 {
+		startId = 0
+	}
+	if limit <= 0 {
+		limit = 15
+	}
+
+	if err = db.GetConnection().Preload("User").Where("id >= ?", startId).Order("ID asc").Limit(limit).Find(&messages).Error; err != nil {
 		return
 	}
 

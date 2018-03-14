@@ -6,10 +6,27 @@ import (
 	"net/http"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/mokoshi/simple-chat/go-api-server/middleware"
+	"github.com/mokoshi/simple-chat/go-api-server/models"
 )
 
 func ListMessages(c echo.Context) (e error) {
-	messages, _ := service.GetMessages()
+	req := struct {
+		StartId uint `query:"start_id"`
+		EndId   uint `query:"end_id"`
+		Limit   uint `query:"limit"`
+	}{}
+	if e = c.Bind(&req); e != nil {
+		return
+	}
+
+	var messages []models.Message
+	if req.StartId > 0 {
+		// start_id が指定されている場合は新しいメッセージを取得
+		messages, _ = service.GetNewerMessages(req.StartId, req.Limit)
+	} else {
+		// それ以外の場合は古いメッセージを取得
+		messages, _ = service.GetOlderMessages(req.EndId, req.Limit)
+	}
 
 	return c.JSON(http.StatusOK, messages)
 }
@@ -23,7 +40,6 @@ func PostMessages(c echo.Context) (e error) {
 	req := struct {
 		Text string `form:"text"`
 	}{}
-
 	if e = c.Bind(&req); e != nil {
 		return
 	}
