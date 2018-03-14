@@ -45,6 +45,7 @@ export default {
     async post () {
       await axios.post(`/api/messages`, {text: this.text})
       await this.$store.dispatch('fetchNewerMessages')
+      this.text = ''
     },
     async loadMore () {
       await this.$store.dispatch('fetchOlderMessages')
