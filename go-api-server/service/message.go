@@ -7,9 +7,9 @@ import (
 
 const MaxInt = 4294967295
 
-func GetOlderMessages(endId uint, limit uint) (messages []models.Message, err error) {
+func GetOlderMessages(endId int, limit uint) (messages []models.Message, err error) {
 
-	if endId <= 0 {
+	if endId < 0 {
 		endId = MaxInt
 	}
 	if limit <= 0 {
@@ -23,7 +23,7 @@ func GetOlderMessages(endId uint, limit uint) (messages []models.Message, err er
 	return
 }
 
-func GetNewerMessages(startId uint, limit uint) (messages []models.Message, err error) {
+func GetNewerMessages(startId int, limit uint) (messages []models.Message, err error) {
 
 	if startId <= 0 {
 		startId = 0

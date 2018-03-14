@@ -11,8 +11,8 @@ import (
 
 func ListMessages(c echo.Context) (e error) {
 	req := struct {
-		StartId uint `query:"start_id"`
-		EndId   uint `query:"end_id"`
+		StartId int  `query:"start_id"`
+		EndId   int  `query:"end_id"`
 		Limit   uint `query:"limit"`
 	}{}
 	if e = c.Bind(&req); e != nil {
