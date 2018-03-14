@@ -33,6 +33,14 @@ export default {
       text: null
     }
   },
+  mounted () {
+    setInterval(() => {
+      this.$store.dispatch('fetchNewerMessages')
+    }, 1000)
+  },
+  async fetch ({ store }) {
+    await store.dispatch('fetchNewerMessages')
+  },
   methods: {
     async post () {
       await axios.post(`/api/messages`, {text: this.text})

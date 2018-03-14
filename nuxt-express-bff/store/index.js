@@ -33,6 +33,9 @@ export const actions = {
   },
 
   async fetchNewerMessages ({ state, commit, getters }) {
+    if (getters.maxMessageId === 0) {
+      return
+    }
     const params = {limit: 5, start_id: getters.maxMessageId + 1}
     let { data } = await axios.get(`/api/messages`, {params})
     commit('APPEND_MESSAGES', data)
